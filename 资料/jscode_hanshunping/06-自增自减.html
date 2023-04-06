@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 自增自减 </title>
+
+    <script type="text/javascript">
+
+        var a = 3;
+        var b = (a++);
+        window.alert("b 的值是：" + b);  // 3
+
+        var c = (++a);
+        window.alert("c 的值是：" + c);  // 5       
+
+        var d = (++a)++;
+        //Uncaught SyntaxError: Invalid left-hand side expression in postfix operation
+        window.alert("d 的值是：" + d); 
+
+    </script>
+
+</head>
+<body>
+
+
+</body>
+</html>

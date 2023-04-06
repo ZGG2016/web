@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 逻辑与 </title>
+
+    <script type="text/javascript">
+        // 在逻辑运算中，0 "" false null undefined NaN 均表示false
+
+        // 逻辑与短路：遇到结果为 false 时不再进行向下判断
+        var a = 3;
+        var b = 4;
+        var c = 1;
+        // a++ 未执行
+        if(a<b && --c && a++){
+            window.alert("ok" + a);
+        }
+
+        window.alert(c); //0
+        window.alert(a); // 3
+        
+    </script>
+
+</head>
+<body>
+
+
+</body>
+</html>

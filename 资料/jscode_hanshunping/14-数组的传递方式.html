@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 数组的传递方式 </title>
+    <script type="text/javascript">
+
+        // 数据传递的原则：
+        //   1.基本类型传递的是值
+        //   2.数组传递的是引用
+
+        var arr1 = ["zhangsan","lisi"];
+
+        window.alert("修改前：" + arr1[1]);
+
+        var arr2 = arr1;
+        // arr2[1] = "wangwu";
+        
+        // window.alert("修改后 arr1：" + arr1[1]);
+        // window.alert("修改后 arr2：" + arr2[1]);
+
+        arr2 = null;
+        window.alert("修改后 arr1：" + arr1[1]);
+        window.alert("修改后 arr2：" + arr2[1]);
+
+    </script>
+
+</head>
+<body>
+
+
+</body>
+</html>

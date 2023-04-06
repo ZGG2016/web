@@ -1,0 +1,27 @@
+.juzhong{       // 这部分会在css中显示
+// .juzhong(){  // 这部分不会在css中显示
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: red;
+    height: 100px;
+    width: 100px;    
+}
+
+
+#wrap{
+    position: relative;
+    width: 300px;
+    height: 400px;
+    border: 1px solid;
+    margin: 0 auto;
+    .inner{
+        .juzhong;
+    }
+    .inner2{
+        .juzhong;
+    }
+}
