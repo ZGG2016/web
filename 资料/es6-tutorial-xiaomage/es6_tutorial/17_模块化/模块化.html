@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模块化</title>
+</head>
+<body>
+<script type="module">
+    // commonJS 用于服务器   AMD 用于浏览器
+    // 而 ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，
+    //   完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。
+    // ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。
+    //   CommonJS 和 AMD 模块，都只能在运行时确定这些东西。
+
+    import * as f from "./modules/index";
+    console.log(f.default);
+
+    import Person,{name,age,sayName} from "./modules/index";
+    console.log(name,age,sayName());
+
+    let p = new Person();
+    console.log(p.sayName());
+
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组</title>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<script>
+    // 伪数组:
+    // (1) jQuery 对象（比如 $(“div”) ）
+    // (2) 函数内部的 arguments
+    // (3) DOM 对象列表（比如通过 document.getElementsByTags ，document.childNodes返回的NodeList对象）
+    // --------------------------------------
+    // 1. Array.from() 将伪数组转成真正的数组
+    // 1.1 函数内部的 arguments
+    // function add() {
+    //     // Arguments(3) [1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    //     console.log(arguments);
+    //     let arr = Array.from(arguments);
+    //     // (3) [1, 2, 3]
+    //     console.log(arr);
+    // }
+    // add(1, 2, 3);
+    // 1.2 DOM 对象列表
+    // let lis = document.getElementsByTagName("li");
+    // console.log(lis); // HTMLCollection(3) [li, li, li]
+    // console.log(Array.from(lis)); // (3) [li, li, li]
+    // 1.3 使用扩展运算符将伪数组转成真正的数组
+    // console.log([...lis]); // (3) [li, li, li]
+
+    // 1.4 from 的第二个参数回调函数，用来处理每个元素
+    // let licontents = Array.from(lis, c=>c.textContent);
+    // console.log(licontents); // (3) ['1', '2', '3']
+
+    // 2. Array.of 将任意数据类型转成数组
+    // let arr = Array.of(1, 2, [3], {'a': 1});
+    // console.log(arr); // (4) [1, 2, Array(1), {…}]
+
+    // 3. copyWithin(复制序列到该位置,开始复制元素的起始位置,开始复制元素的结束位置)
+    // 浅复制数组的一部分到同一数组中的另一个位置，并返回它，不会改变原数组的长度。
+    // console.log([1, 2, 3, 8, 9, 10].copyWithin(0, 3)); // (6) [8, 9, 10, 8, 9, 10]
+
+    // 4. find() 返回满足条件的第一个数组成员
+    // findIndex() 返回满足条件的第一个数组成员索引
+    // console.log([1, 2, -2].find(x => x < 0)); // -2
+
+    // 5. 遍历： entries()索引和值 keys()索引 values()值
+    // console.log(['a','b'].keys());
+    // for (let index of ['a','b'].keys()){
+    //     console.log(index);
+    // }
+    // for (let value of ['a','b'].values()){
+    //     console.log(value);
+    // }
+    // for (let [index,value] of ['a','b'].entries()){
+    //     console.log(index,value);
+    // }
+    // let ite = ['a','b'].entries();
+    // console.log(ite.next().value);
+    // console.log(ite.next().value);
+
+    // 6. includes() 数组包含
+    console.log(['a','b','c'].includes('a')); // true
+</script>
+
+</body>
+</html>

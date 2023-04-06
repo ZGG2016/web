@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数this指向</title>
+</head>
+<body>
+<script>
+    // 1. es5中this指向：取决于调用该函数的上下文对象 【即document】
+    // let PageHandler = {
+    //     id: 123,
+    //     init: function () {
+    //         document.addEventListener('click', function (event) {
+    //             // 整个 document 对象
+    //             console.log(this);
+    //             // Uncaught TypeError: this.doSomeThings is not a function
+    //             this.doSomeThings(event.type);
+    //         })
+    //     },
+    //     doSomeThings: function (type) {
+    //         console.log(`事件类型: ${type}，当前id: ${this.id}`);
+    //     }
+    // }
+    // PageHandler.init();
+
+    // 2. 解决this指向问题
+    // let PageHandler = {
+    //     id: 123,
+    //     init: function () {
+    //         document.addEventListener('click', function (event) {
+    //             // 使用bind改变内部函数this的指向
+    //             console.log(this);  // {id: 123, init: ƒ, doSomeThings: ƒ}
+    //             this.doSomeThings(event.type);
+    //         }.bind(this), false);
+    //     },
+    //     doSomeThings: function (type) {
+    //         // 事件类型: click，当前id: 123
+    //         console.log(`事件类型: ${type}，当前id: ${this.id}`);
+    //     }
+    // }
+    // PageHandler.init();
+
+    // 3. 箭头函数  this
+    // let PageHandler = {
+    //     id: 123,
+    //     init: function () {
+    //         document.addEventListener('click', (event) =>{
+    //             // 箭头函数没有this的指向，箭头函数内部的this值只能通过查找作用域链来确定
+    //             // 如果箭头函数被一个非箭头函数所包括，那么this的值与该函数的所属对象相等，否则 则是全局的window对象
+    //             console.log(this); // {id: 123, init: ƒ, doSomeThings: ƒ}
+    //             this.doSomeThings(event.type);
+    //         }, false);
+    //     },
+    //     doSomeThings: function (type) {
+    //         // 事件类型: click，当前id: 123
+    //         console.log(`事件类型: ${type}，当前id: ${this.id}`);
+    //     }
+    // }
+    // PageHandler.init();
+
+    // 4. 使用箭头函数的注意事项
+    // 4.1 箭头函数中没有 arguments 对象
+    // var getVal = (a, b) => {
+    //     console.log(arguments); // Uncaught ReferenceError: arguments is not defined
+    //     return a + b;
+    // }
+    // console.log(getVal(1, 2));
+    // 4.2 箭头函数不能使用new关键字来实例化对象
+    let person = ()=>{};
+    let p1 = new person(); // 报错 Uncaught TypeError: person is not a constructor
+</script>
+</body>
+</html>

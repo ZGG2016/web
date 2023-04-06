@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成器</title>
+</head>
+<body>
+<script>
+    // generate函数
+    // 通过 yield 关键字，将函数挂起，为了改变执行流提供了可能，也为异步编程提供了方案
+    // 和普通函数的区别：
+    //    1. function 后面，函数名前有一个 *
+    //    2. 只能在函数内部使用 yield 表达式，让函数挂起
+
+    // ------------ 理解1 ------------
+    // function* func() {
+    //     console.log("one");
+    //     yield 2;
+    //     console.log("two");
+    //     yield 3;
+    //     console.log("end");
+    // }
+    // // 返回一个遍历器对象，可以调用 next()
+    // let fn = func();
+    // // console.log(fn);
+    // // 当这里调用next时，输出“one”，并返回2，此时程序就挂起在 'yield 2;'
+    // console.log(fn.next()); // one {value: 2, done: false}
+    // // 当这里再次调用next时，输出“two”，并返回3，此时程序再挂起在 'yield 3;'
+    // console.log(fn.next()); // two {value: 3, done: false}
+    // // 当这里再次调用next时，输出“end”
+    // console.log(fn.next()); // end {value: undefined, done: true}
+
+    // *总结*：generate函数是分段执行的，遇到yield语句暂停执行，而调用next方法恢复执行
+    // 【类似调式程序打断点】
+
+    // ------------ 理解2 ------------
+    // function* add() {
+    //     console.log("start");
+    //     // x 不是 yield 2 的返回值，它是 next() 调用 恢复当前yield执行传入的实参
+    //     // 【下一次调用 next() 传入的实参】
+    //     let x = yield 2;
+    //     console.log('one: ' + x);
+    //     let y = yield 3;
+    //     console.log('two: ' + y);
+    //     return x + y
+    // }
+    // const fn = add();
+    // // 这里调用next时，输出“start”，并返回2，此时程序就挂起在 'yield 2;'，而不是挂起在给x赋值位置
+    // // start {value: 2, done: false}
+    // console.log(fn.next());
+    // // 这里调用next时，会从给x赋值位置开始，把10赋给x，并输出 "one: 10"，此时程序就挂起在 'yield 3;'
+    // // one: 10  {value: 3, done: false}
+    // console.log(fn.next(10));
+    // // 这里调用next时，会从给y赋值位置开始，把20赋给y，并输出 "two: 20"，返回 10+20
+    // // two: 20  {value: 30, done: true}
+    // console.log(fn.next(20));
+
+    // ------------ 应用场景 ------------
+    // 为不具备Iterator接口的对象提供遍历操作
+    function* objectEntries(obj) {
+        // 获取对象的所有的 key 保存到数组 [name,age]
+        const propKeys = Object.keys(obj);
+        for (let propKey of propKeys) {
+            yield [propKey, obj[propKey]];
+        }
+    }
+    const obj = {
+        name: 'zhangsan',
+        age: 18
+    };
+    // 给 obj 一个 Symbol.iterator 属性，其值就是上面定义的生成器
+    obj[Symbol.iterator] = objectEntries;
+    console.log(obj); // {name: 'zhangsan', age: 18, Symbol(Symbol.iterator): ƒ}
+    for (let [key,value] of objectEntries(obj)){
+        console.log(`${key} -- ${value}`);
+    }
+
+</script>
+</body>
+</html>

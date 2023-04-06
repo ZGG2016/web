@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扩展的对象功能</title>
+</head>
+<body>
+<script>
+    // 1. es6可以直接写入变量和函数，作为对象的属性和方法
+    // const name = "zhangsan";
+    // const age = 15;
+    // let person = {
+    //     name,
+    //     age,
+    //     sayName(){
+    //         console.log(this); // 就是person对象
+    //         console.log(this.name); // zhangsan
+    //     }
+    // }
+    // person.sayName();
+    // 以上就相当于:
+    // let person = {
+    //     name:name,
+    //     age:age,
+    //     sayName: function (){
+    //         console.log(this); // 就是person对象
+    //         console.log(this.name); // zhangsan
+    //     }
+    // }
+
+    // 应用场景1：在函数返回一个对象时
+    // let add = function (x, y) {
+    //     return {x, y};
+    // }
+    // console.log(add(1,2)); // {x: 1, y: 2}
+
+    // 应用场景2：取值器和设置器
+    // let car = {
+    //     wheel:4,
+    //     set(newVal){
+    //         this.wheel = newVal;
+    //     },
+    //     get(){
+    //         return this.wheel;
+    //     }
+    // }
+    // car.set(6);
+    // console.log(car.get()); // 6
+
+    // 2. 对象中使用表达式
+    // const name = 'a';
+    // const obj = {
+    //     [name + 'bc']: 123,
+    //     ['f' + name]() {
+    //         console.log(this);
+    //     }
+    // }
+    // console.log(obj); // {abc: 123, fa: ƒ}
+
+    // 3. 对象的方法
+    // is()  比较两个值是否严格相等
+    console.log(NaN === NaN); // false
+    console.log(Object.is(NaN,NaN)); // true
+    // Object.assign(target, obj1,obj2...) 将 obj1,obj2... 合并到target对象
+    let newObj = Object.assign({},{'a':1},{'b':2});
+    console.log(newObj); // {a: 1, b: 2}
+
+</script>
+
+</body>
+</html>

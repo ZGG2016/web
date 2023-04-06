@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios拦截器-单个</title>
+    <link crossorigin="anonymous" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+
+<script>
+
+    // 添加一个请求拦截器
+    axios.interceptors.request.use(function (config) {
+        console.log("请求拦截器 成功");
+        // 修改请求参数
+        config.params = {a:'100'};
+        throw "出错了";
+        return config;
+    }, function (error) {
+        console.log("请求拦截器 失败");
+        return Promise.reject(error);
+    });
+
+    // 添加一个响应拦截器
+    axios.interceptors.response.use(function (response) {
+        console.log("响应拦截器 成功");
+        // 只返回数据部分
+        return response.data;
+    }, function (error) {
+        console.log("响应拦截器 失败");
+        return Promise.reject(error);
+    });
+
+    axios({
+        baseURL: "http://localhost:3000/posts/1",
+        timeout: 2000
+    }).then(response=>{
+        console.log("自定义回调处理成功");
+        console.log(response);
+    }).catch(reason=>{
+        console.log("自定义失败回调");
+    });
+    // 输出顺序：
+    // 请求拦截器 成功
+    // 响应拦截器 成功
+    // 自定义回调处理成功
+
+    // 如果加了 throw 语句
+    // 请求拦截器 成功
+    // 响应拦截器 失败
+    // 自定义失败回调
+</script>
+
+</body>
+</html>

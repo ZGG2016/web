@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板字符串</title>
+</head>
+<body>
+    <div class="box"></div>
+
+    <script>
+        const dbox = document.querySelector(".box")
+        const id = 's';
+        const name = 'zhangsan';
+        // 使用模板字符串，并插入变量
+        const htmlStr = `<ul>
+                            <li>
+                                <span id=${id}> ${name} </span>
+                            </li>
+                        </ul>`
+        dbox.innerHTML = htmlStr;
+    </script>
+</body>
+</html>

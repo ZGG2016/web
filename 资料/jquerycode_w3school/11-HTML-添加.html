@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 添加 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      $(document).ready(function(){
+         $("#btn1").click(function(){
+            $("a").prepend("W3School: ");
+         });
+
+         $("#btn2").click(function(){
+
+            var txt1="<p>HTML</p>";               // 以 HTML 创建新元素
+            var txt2=$("<p></p>").text("CSS");   // 以 jQuery 创建新元素
+            var txt3=document.createElement("p");  // 以 DOM 创建新元素
+            txt3.innerHTML="JavaScript.";
+            $("a").append(txt1,txt2,txt3);
+         });
+
+
+         $("#btn3").click(function(){
+            $("a").before("W3School: ");
+         });
+
+         $("#btn4").click(function(){
+            $("a").after(" : HTML");
+         });
+
+      });
+     
+
+    </script>
+
+</head>
+<body>
+
+   <button type="button" id="btn1"> 点我在被选元素的开头插入内容 </button><br><br>
+
+   <button type="button" id="btn2"> 点我在被选元素的结尾插入内容 </button><br><br>
+
+   <button type="button" id="btn3"> 点我在被选元素之前插入内容 </button><br><br>
+
+   <button type="button" id="btn4"> 点我在被选元素之后插入内容 </button><br><br>
+ 
+   
+   <a href='https://www.w3school.com.cn/'> 学习教程 </a>
+
+</body>
+</html>

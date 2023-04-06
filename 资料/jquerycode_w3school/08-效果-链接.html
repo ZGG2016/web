@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 链接 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      // 浏览器就不必多次查找相同的元素，代码行会变得很差。
+
+      $(document).ready(function(){
+         $("#btn").click(function(){
+
+            $("p").css("color","red").fadeOut(1000).fadeIn(1000);
+
+         });
+
+      });
+     
+
+    </script>
+
+</head>
+<body>
+
+   <p> hello hello</p>
+
+   <button type="button" id="btn"> 点我显示 </button><br><br>
+
+</body>
+</html>

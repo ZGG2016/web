@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类class</title>
+</head>
+<body>
+<script>
+    // es5 造类
+    // function Person(name,age) {
+    //     this.name = name;
+    //     this.age = age;
+    // }
+    // Person.prototype.sayName = function () {
+    //     return this.name;
+    // }
+    // let p = new Person("zhangsan",12);
+    // console.log(p);
+
+    // es6 造类
+    class Person{
+        // 实例化的时候立即调用
+        constructor(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+        // 可以这样创建方法
+        // sayName(){
+        //     return this.name;
+        // }
+        // sayAge(){
+        //     return this.age;
+        // }
+    }
+    // 也可以这样创建方法
+    Object.assign(Person.prototype,{
+        sayName(){
+            return this.name;
+        },
+        sayAge(){
+            return this.age;
+        }
+    })
+    let p = new Person("zhangsan",12);
+    console.log(p);
+</script>
+</body>
+</html>

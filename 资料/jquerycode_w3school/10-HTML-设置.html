@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 获取 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      // 可以使用“09-HTML-获取”文件中的四个方法来设置内容，可以使用回调函数
+
+      $(document).ready(function(){
+         $("#btn1").click(function(){
+            $("a").attr({
+               "href": "https://www.w3school.com.cn/",
+               "title" : "W3School jQuery Tutorial"
+            });
+         });
+
+         $("#btn2").click(function(){
+            $("a").attr("href",function(i,origValue){
+               return origValue + "html/html-tutorial.html";
+            });
+         });
+
+      });
+     
+
+    </script>
+
+</head>
+<body>
+
+   <button type="button" id="btn1"> 点我修改链接 </button><br><br>
+   
+   <button type="button" id="btn2"> 点我进入菜鸟的html学习页面 </button><br><br>
+
+   <a href='https://www.runoob.com/'> 学习教程 </a>
+
+</body>
+</html>

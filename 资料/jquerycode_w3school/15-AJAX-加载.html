@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 加载 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      // url   规定要将请求发送到哪个 URL。
+      // data  可选。规定连同请求发送到服务器的数据。
+      // function(response,status,xhr) 可选。规定当请求完成时运行的函数。
+
+         $(document).ready(function(){
+
+           $("button").click(function(){
+
+         
+              $("#div1").load("data/demo_test.txt",function(responseTxt,statusTxt,xhr){
+               if(statusTxt=="success")
+                 alert("外部内容加载成功！");
+               if(statusTxt=="error")
+                 alert("Error: "+xhr.status+": "+xhr.statusText);
+             });
+           });
+         });
+
+    </script>
+
+
+</head>
+<body>
+
+   <div id="div1"><h2>使用 jQuery AJAX 来改变文本</h2></div>
+
+   <button>获得外部内容</button>
+
+</body>
+</html>

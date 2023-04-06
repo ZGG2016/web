@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 动画 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      $(document).ready(function(){
+         $("#btn1").click(function(){
+
+            $("div").animate({
+               left: '100px',
+               width: '200px',
+               height: '100px'
+            });
+
+            $("div").animate({fontSize: '3em'},1000);
+
+            $("div").animate({height: 'hide'},1000);
+
+            $("div").animate({height: 'show'},8000);
+           
+         });
+
+         $("#btn2").click(function(){
+            $("div").stop();
+         });
+
+      });
+     
+
+    </script>
+
+</head>
+<body>
+
+   <button type="button" id="btn1"> 点我显示动画 </button><br><br>
+
+   <button type="button" id="btn2"> 点我停止 </button><br><br>
+
+   <div style="width: 50px;height: 50px;background-color: red;position: absolute;"> hello </div><br>
+
+
+</body>
+</html>

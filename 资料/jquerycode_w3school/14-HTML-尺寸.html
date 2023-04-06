@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 尺寸 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      $(document).ready(function(){
+
+         $("#btn1").click(function(){
+            var txt="";
+            txt+="Width: " + $("#div1").width() + "</br>";
+            txt+="Height: " + $("#div1").height();
+            $("#div1").html(txt);
+         });
+
+
+         $("#btn2").click(function(){
+            var txt="";
+            txt+="Inner width: " + $("#div1").innerWidth() + "</br>";
+            txt+="Inner height: " + $("#div1").innerHeight();
+            $("#div1").html(txt);
+         });
+
+
+         $("#btn3").click(function(){
+            var txt="";
+            txt+="Outer width: " + $("#div1").outerWidth() + "</br>";
+            txt+="Outer height: " + $("#div1").outerHeight();
+            $("#div1").html(txt);
+         });
+
+
+         $("#btn4").click(function(){
+            var txt="";
+            txt+="Outer width (+margin): " + $("#div1").outerWidth(true) + "</br>";
+            txt+="Outer height (+margin): " + $("#div1").outerHeight(true);
+            $("#div1").html(txt);
+         });
+
+         $("#btn5").click(function(){
+            $("#div1").width(500).height(500);
+         });
+
+
+      });
+     
+
+    </script>
+
+
+</head>
+<body>
+
+   <button type="button" id="btn1"> 点我获取元素的宽度高度（不包括内边距、边框或外边距） </button><br><br>
+
+   <button type="button" id="btn2"> 点我获取元素的宽度高度（包括内边距） </button><br><br>
+
+   <button type="button" id="btn3"> 点我获取元素的宽度高度（包括内边距和外边距） </button><br><br> 
+   
+   <button type="button" id="btn4"> 点我获取文档（HTML 文档）和窗口（浏览器视口）的宽度和高度 </button><br><br>
+
+   <button type="button" id="btn5"> 点我设置获取元素的宽度和高度 </button><br><br> 
+
+   <div id="div1" style="height:100px;width:300px;padding:10px;margin:3px;border:1px solid blue;background-color:lightblue;"></div><br>
+
+   <p>height:100px</p>
+
+   <p>width:300px</p>
+
+   <p>padding:10px</p>
+
+   <p>margin:3px</p>
+
+   <p>border:1px</p>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 滑动效果 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      $(document).ready(function(){
+         $("#p1").click(function(){
+            $("div").slideDown(1000);
+           
+         });
+
+         $("#p2").click(function(){
+            $("div").slideUp(1000);
+           
+         });
+
+         $("#p3").click(function(){
+            $("div").slideToggle(1000);
+           
+         });
+
+      });
+     
+
+    </script>
+
+</head>
+<body>
+
+  <div style="background-color: red;width: 200px;">
+     
+     <p>滑动效果 滑动效果</p>
+     <p>滑动效果 滑动效果</p>
+     <p>滑动效果 滑动效果</p>
+
+  </div><br>
+
+  <p id="p1"> 点我下滑 </p>
+
+  <p id="p2"> 点我上滑 </p>
+
+  <p id="p3"> 点我上下滑切换 </p>
+
+</body>
+</html>

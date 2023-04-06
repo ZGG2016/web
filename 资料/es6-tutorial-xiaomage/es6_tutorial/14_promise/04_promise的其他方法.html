@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise的其他方法</title>
+</head>
+<body>
+<script>
+    // 1. resolve  将现有的任何对象转换成promise对象
+    // let p1 = Promise.resolve("foo");
+    // // 相当于：
+    // // let p1 = new Promise(resolve=>{
+    // //     resolve("foo");
+    // // })
+    // // console.log(p1); // Promise {<fulfilled>: 'foo'}
+    // p1.then((data)=>{
+    //     console.log(data);
+    // })
+
+    // 2. all 并行执行异步操作
+    // let p2 = new Promise((resolve, reject) => {
+    //     resolve("p2p2");
+    // });
+    // let p3 = new Promise((resolve, reject) => {
+    //     resolve("p3p3");
+    // });
+    // let p4 = new Promise((resolve, reject) => {
+    //     resolve("p4p4");
+    // });
+    //
+    // let p5 = Promise.all([p2, p3, p4]);
+    // p5.then(data=>{
+    //     console.log(data); // (3) ['p2p2', 'p3p3', 'p4p4']
+    //     console.log(data.find(x=>x==="p2")); // p2p2
+    // }).catch(err=>{
+    //     console.log("错误：", err);
+    // })
+    // -------------------------
+    // let p2 = new Promise((resolve, reject) => {
+    //     resolve("p2p2");
+    // });
+    // let p3 = new Promise((resolve, reject) => {
+    //     reject("失败 -- p3p3");
+    // });
+    // let p4 = new Promise((resolve, reject) => {
+    //     resolve("p4p4");
+    // });
+    // // 输出：
+    // // 错误： 失败 -- p3p3
+    // let p5 = Promise.all([p2, p3, p4]);
+    // p5.then(data=>{
+    //     console.log(data);
+    // }).catch(err=>{
+    //     console.log("错误：", err);
+    // })
+    // -------------------------
+    // let p2 = new Promise((resolve, reject) => {
+    //     resolve("p2p2");
+    // });
+    // let p3 = new Promise((resolve, reject) => {
+    //     reject("失败 -- p3p3");
+    // }).catch(err=>{
+    //     console.log("p3 内部的 catch");
+    // });
+    // let p4 = new Promise((resolve, reject) => {
+    //     resolve("p4p4");
+    // });
+    // // 输出：
+    // // p3 内部的 catch
+    // // (3) ['p2p2', undefined, 'p4p4']
+    // // 如果在 p3 中没有catch就不会输出： (3) ['p2p2', undefined, 'p4p4']
+    // let p5 = Promise.all([p2, p3, p4]);
+    // p5.then(data=>{
+    //     console.log(data);
+    // }).catch(err=>{
+    //     console.log("错误：", err);
+    // })
+
+    // 参考理解： https://blog.csdn.net/weixin_45664402/article/details/117818808
+
+    // 3. race 为某个异步请求设置超时时间，并且在超时后执行相应的操作
+    // Creates a Promise that is resolved or rejected when any of the provided Promises are resolved or rejected.
+    // 请求图片资源
+    function reqImg(imgSrc) {
+        return new Promise((resolve,reject)=>{
+            const img = new Image();
+            img.onload = function () {
+                resolve(img);
+            }
+            img.src = imgSrc;
+        })
+    }
+    function timeout() {
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                reject(new Error("图片请求超时"));
+            },1000);
+        })
+    }
+    Promise
+        .race([reqImg("https://img2.baidu.com/it/u=2901216549,1988942842&fm=253&fmt=auto&app=138&f=JPEG?w=499&h=202"),
+               timeout()])
+        .then(data=>{  // 请求成功，就添加到页面上
+            document.body.appendChild(data);
+        }).catch(err=>{  // 3s超时，就输出 "图片请求超时"
+            console.log(err)
+        })
+</script>
+</body>
+</html>

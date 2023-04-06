@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>async</title>
+</head>
+<body>
+<script>
+    // generator promise async
+    // 1. 解决回调地狱
+    // 2. 使得异步操作更加方便
+
+    // 作用：使得异步操作更加方便
+    // async 是 generator 的一个语法糖
+    // async 会返回一个 promise 对象
+    // async function f() {
+    // // 等 await 后的语句执行完成后，才往下执行
+    //     // return await 'hello world'; // 会把它封装成一个 promise 对象
+    //     let s = await 'hello world';
+    //     let data = await s.split(" ");
+    //     return data;
+    // }
+    // // 如果async函数中有多个await，那么then函数会等待所有的await指令运行完的结果，才会执行
+    // f().then(v => {
+    //     console.log(v); // (2) ['hello', 'world']
+    // }).catch(err => {
+    //     console.log(err);
+    // })
+
+    //-------------------------------
+    // async function f2() {
+    //     throw new Error("出错了");
+    // }
+    // f2().then(v=>console.log(v)).catch(e=>console.log(e)); // Error: 出错了
+
+    //-------------------------------
+    // async function f2() {
+    //     // 执行到reject就停止了，不会输出 hello
+    //     await Promise.reject('出错了');
+    //     await Promise.resolve('hello');
+    // }
+    // f2().then(v=>console.log(v)).catch(e=>console.log(e)); // 出错了
+
+    // 解决上述问题
+    // async function f2() {
+    //     // 此时就输出了 hello
+    //     try{
+    //         await Promise.reject('出错了');
+    //     }catch (error){}
+    //     return await Promise.resolve('hello');
+    // }
+    // f2().then(v=>console.log(v)).catch(e=>console.log(e));
+
+    //-------------------------------
+    const getJson = function (url) {
+        return new Promise((resolve,reject)=>{
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET',url);
+            xhr.onreadystatechange = handler;
+            xhr.responseType = 'json';
+            xhr.setRequestHeader('Accept','application/json');
+            xhr.send();
+            function handler() {
+                if (this.readyState === 4){
+                    if (this.status === 200){
+                        resolve(this.response);
+                    }else{
+                        reject(new Error(this.statusText));
+                    }
+                }
+            }
+        })
+    }
+
+    // 需求：获取和风天气现在的数据
+    async function getNowWeather(url) {
+        let res = await getJson(url);
+        console.log("res: ",res);
+        let arr = await res.HeWeather6;
+        return arr[0].now;
+    }
+    getNowWeather("https://free-api.heweather.net/s6/weather/now?location=beijing&key=8570f6b17578432d86eabe3290e5c659")
+        .then(now=>{
+            console.log("now: ",now);
+        })
+
+</script>
+</body>
+</html>

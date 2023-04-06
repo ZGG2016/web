@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery-jsonp</title>
+	<script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+        #result{
+            width:300px;
+            height:100px;
+            border:solid 1px #089;
+        }
+    </style>
+</head>
+<body>
+	<!-- 点击按钮，发送请求，响应体内容呈现在div内 -->
+	<button>点击发送 jsonp 请求</button>
+    <div id="result"></div>
+
+    <script type="text/javascript">
+    	$("button").eq(0).click(function(){
+    		$.getJSON('http://127.0.0.1:8000/jquery-jsonp-server?callback=?', 
+    			function(data){
+    				$("div").html(`
+    					姓名：${data.name}<br>
+    					年龄：${data.age}
+    					`);
+    		});
+    	})
+    </script>
+
+</body>
+</html>

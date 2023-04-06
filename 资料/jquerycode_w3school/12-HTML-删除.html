@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 删除 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+      $(document).ready(function(){
+         $("#btn1").click(function(){
+            $("#div1").remove();
+         });
+
+         $("#btn2").click(function(){
+            $("#div2").empty();
+           
+         });
+
+
+         $("#btn3").click(function(){
+            $("p").remove("#id1");
+         });
+
+      });
+     
+
+    </script>
+
+</head>
+<body>
+
+   <button type="button" id="btn1"> 点我删除 div1 及其子元素 </button><br><br>
+
+   <button type="button" id="btn2"> 点我删除 div2 中的子元素 </button><br><br>
+
+   <button type="button" id="btn3"> 点我删除 id 为 id1 的元素 </button><br><br> 
+   
+
+   <div id="div1" style="width:100px;height:100px;background-color: red">
+      <p> div1 html </p>
+      <p> div1 css </p>
+   </div>
+
+   <div id="div2" style="width:100px;height:100px;background-color: red">
+      <p> div2 html </p>
+      <p> div2 css </p>
+   </div>
+
+   <div id="div3" style="width:100px;height:100px;background-color: red">
+      <p id="id1"> div3 html </p>
+      <p id="id2"> div3 css </p>
+   </div>
+
+</body>
+</html>

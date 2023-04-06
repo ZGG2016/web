@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成器应用</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    // 应用：generator 部署ajax操作，让异步代码同步化
+    // 1. 解决回调地狱 （一直在回调函数中继续发请求），也就是一次请求完成后，再往下执行
+    // function* main() {
+    //     console.log("main");
+    //     // 操作执行完 成功回调里的next方法后，将请求的数据赋给res，再往下执行。
+    //     // 也就是说请求完成后，再往下执行
+    //     let res = yield request('https://free-api.heweather.net/s6/weather/now?location=beijing&key=8570f6b17578432d86eabe3290e5c659');
+    //     console.log(res);
+    //     console.log("数据请求完成，可以继续操作");
+    // }
+    // const ite = main();
+    // ite.next();
+    //
+    // function request(url) {
+    //     $.ajax({
+    //         url,
+    //         method:'get',
+    //         success(res){
+    //             ite.next(res);
+    //         }
+    //     })
+    // }
+
+    // 2. loading页面的加载与隐藏
+    // 正确的顺序是 加载loading页面，数据请求完成后，再隐藏
+    function loadUI() {
+        console.log("加载loading...页面");
+    }
+    function showData() {
+        // 模拟异步操作
+        setTimeout(()=>{
+            console.log("数据加载完成");
+            ite.next();
+        },1000);
+    }
+    function hideUI() {
+        console.log("隐藏loading...页面");
+    }
+    // 如果这么调用，执行顺序就错误了
+    // 加载loading...页面   隐藏loading...页面   数据加载完成
+    // loadUI();
+    // showData();
+    // hideUI();
+
+    // 可以通过生成器实现
+    // 加载loading...页面   数据加载完成   隐藏loading...页面
+    function* main() {
+        loadUI();
+        yield showData();
+        hideUI();
+    }
+    const ite = main();
+    ite.next();
+</script>
+</body>
+</html>

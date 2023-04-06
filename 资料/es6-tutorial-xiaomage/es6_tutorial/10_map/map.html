@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+</head>
+<body>
+<script>
+  // map 类型是键值对的有序列表，键和值是任意类型
+  let map = new Map();
+  console.log(map);  // Map(0) {size: 0}
+  map.set('name','zhangsan');
+  map.set('age',22);
+  console.log(map); // Map(2) {'name' => 'zhangsan', 'age' => 22}
+  console.log(map.get('name')); // zhangsan
+  map.set(['a',[1,2]],'hello');
+  console.log(map); // Map(3){'name' => 'zhangsan', 'age' => 22, Array(2) => 'hello'}
+
+  //创建的时候初始化
+  let map2 = new Map([['a',1],['b',2]]);
+  console.log(map2); // Map(2) {'a' => 1, 'b' => 2}
+</script>
+</body>
+</html>

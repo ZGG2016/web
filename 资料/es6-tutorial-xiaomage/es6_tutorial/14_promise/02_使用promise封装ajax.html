@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用promise封装ajax</title>
+</head>
+<body>
+<script>
+    const getJson = function (url) {
+        return new Promise((resolve,reject)=>{
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET',url);
+            xhr.onreadystatechange = handler;
+            xhr.responseType = 'json';
+            xhr.setRequestHeader('Accept','application/json');
+            xhr.send();
+            function handler() {
+                if (this.readyState === 4){
+                    if (this.status === 200){
+                        resolve(this.response.HeWeather6);
+                    }else{
+                        reject(new Error(this.statusText));
+                    }
+                }
+            }
+        })
+    }
+
+    getJson('https://free-api.heweather.net/s6/weather/now?location=beijing&key=8570f6b17578432d86eabe3290e5c659')
+        .then(data=>{
+            console.log(data);
+        },err=>{
+            console.log(err);
+        });
+</script>
+</body>
+</html>

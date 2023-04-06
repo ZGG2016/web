@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 隐藏显示 </title>
+    <script src="js/jquery.js"></script>
+    <script>
+
+       $(document).ready(function(){
+         $("#hide").click(function(){
+            $("p").hide("slow");
+         });
+
+         $("#show").click(function(){
+            $("p").show(1000,function(){
+               $("p").css("color","red");
+            });
+         });
+
+         $("#toggle").click(function(){
+            $("p").toggle("slow",callb);
+         });
+
+       });
+
+       function callb() {
+          $("p").css("color","red");
+       }
+ 
+
+    </script>
+
+</head>
+<body>
+
+   <button type="button" id="hide"> 点我隐藏 </button><br><br>
+
+   <button type="button" id="show"> 点我显示 </button><br><br>
+
+   <button type="button" id="toggle"> 点我隐藏显示切换 </button>
+
+
+   <p> hello </p>
+
+</body>
+</html>

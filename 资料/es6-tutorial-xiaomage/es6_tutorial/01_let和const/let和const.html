@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let和const</title>
+</head>
+<body>
+
+    <script>
+        // 2 不会污染全局变量
+        // var RegExp = 10;  // 10  10
+        let RegExp = 10;  // 10  ƒ RegExp() { [native code] }
+        console.log(RegExp);
+        console.log(window.RegExp);
+    </script>
+</body>
+</html>

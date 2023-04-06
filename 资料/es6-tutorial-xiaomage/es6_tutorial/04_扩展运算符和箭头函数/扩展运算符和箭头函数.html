@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扩展运算符和箭头函数</title>
+</head>
+<body>
+<script>
+    // 1. 扩展运算符
+    //    剩余运算符：把多个独立的合并到一个数组中
+    //    扩展运算符：将一个数组分割，并将各个项作为单独的参数传给函数
+    const arr = [1, 2, 3, 4];
+    console.log(...arr); // 1 2 3 4
+    console.log(Math.max(...arr));  // 4
+
+    // 2. 箭头函数：使
+    // 用 => 定义   匿名函数function(){} 相当于 ()=>{}
+    // 2.1 两个参数
+    let add = function (x, y) {
+        return x + y;
+    }
+    let add2 = (x, y) => {
+        return x + y;
+    }
+    console.log(add(1, 2));
+    console.log(add2(1, 2));
+    // 也可以简写成
+    let add3 = (x, y) => x + y;
+    console.log(add3(1, 2));
+
+    // 2.2 只有一个参数
+    let add4 = x => {
+        return x + 5;
+    }
+    console.log(add4(1));
+    // 也可以简写成
+    let add5 = x => x + 5;
+    console.log(add5(1));
+    // 如果直接返回形参
+    let add6 = x => x;
+    console.log(add6(1));
+
+    // 2.3 没有参数
+    let print = () => "zhangsan" + " is 14 years old";
+    console.log(print());
+
+    // 2.4 返回一个对象
+    let getObj = (id) => ({  // 返回的对象一定要用括号包起来
+        id: id,
+        name: "zhangsan"
+    });
+    console.log(getObj(1));
+
+    // 2.5 闭包函数
+    let f1 = (function () {
+        return function () {
+            console.log("zhangsan is 14 years old");
+        }
+    })();
+    // es6写法
+    let f2 = (()=>{
+        return ()=>{
+            console.log("zhangsan is 14 years old");
+        }
+    })();
+    f1();
+    f2();
+</script>
+
+</body>
+</html>

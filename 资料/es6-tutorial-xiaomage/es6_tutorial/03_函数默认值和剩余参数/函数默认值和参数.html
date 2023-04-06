@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数默认值和参数</title>
+</head>
+<body>
+<script>
+    // 1.函数默认值
+    // 1.1 给函数形参传默认值
+    function add(x, y = 10) {
+        return x + y;
+    }
+
+    console.log(add(20));
+    console.log("--------------------");
+
+    // 1.2 形参的默认值是一个函数
+    function add2(x, y = getVal(5)) {
+        return x + y;
+    }
+
+    function getVal(val) {
+        return val + 5;
+    }
+
+    console.log(add2(10));
+    console.log("--------------------");
+
+    // 2. 剩余参数：由三个点和一个紧跟着的具名参数指定  [...keys]
+    function pick(obj, ...keys) {
+        // ...keys 解决了 arguments 的问题
+        console.log(keys);  // ['name', 'age']
+        let res = {};
+        for (let i = 0; i < keys.length; i++) {
+            res[keys[i]] = obj[keys[i]];
+        }
+        return res;
+    }
+
+    const personObj = {
+        name: "zhangsan",
+        age: 18,
+        gender: "male"
+    }
+    const person = pick(personObj, "name", "age");
+    console.log(person); // {name: 'zhangsan', age: 18}
+
+</script>
+</body>
+</html>
